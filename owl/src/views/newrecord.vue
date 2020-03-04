@@ -59,7 +59,7 @@
                         Total : Rs 123
                     </div>
                     <div class="center">
-                        <div class="btn">
+                        <div class="btn" @click="verifyAndSave">
                             verified and save
                         </div>
                     </div>
@@ -75,6 +75,33 @@
 import M from 'materialize-css'
 
 export default {
+    data(){
+        return{
+            name:'',
+            faculty:'',
+            rollno:'',
+            level:'',
+            date:'',
+            time:'',
+            bill:'',
+            total:''
+}
+    },
+    methods:{
+        verifyAndSave(){
+            const details = {
+                name,
+                faculty,
+                rollno,
+                level,
+                date,
+                time,
+                bill,
+                total
+            }
+            this.$store.dispatch('saveABill',details);
+        }
+    },
     mounted(){
         M.AutoInit();
     }
@@ -88,9 +115,9 @@ export default {
         // color:black;
         .container{
             height: 100%;
-            padding: 50px;
         }
         .card{
+            padding: 20px;
             background-color: #021b19;
             color: black;
             margin: 0px;

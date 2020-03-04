@@ -48,6 +48,7 @@ export default {
   methods:{
     saveStudent(){
       console.log(this.details.firstName);
+      this.$store.dispatch('createNewStudent',this.details);
       // this.$store.dispatch("setFlash","new student saved")
     }
   }
