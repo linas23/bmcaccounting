@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '../views/home.vue';
 import NewRecord from '../views/newrecord';
 import Admin from '../views/admin.vue';
-
+import AddStudent from '../views/studentForm.vue';
 Vue.use(VueRouter);
 
 const routes = [
@@ -22,6 +22,7 @@ const routes = [
     name:'Admin',
     component:Admin
   }
+  ,{path:'/addStudent',name:'AddStudent',component:AddStudent}
 ];
 
 const router = new VueRouter({

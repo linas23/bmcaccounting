@@ -1,6 +1,7 @@
 <template>
   <div>
     <Navbar></Navbar>
+    <flash></flash>
     <router-view></router-view>
     <Footer></Footer>
   </div>
@@ -8,14 +9,14 @@
 
 <script>
 import Navbar from "./components/navbar";
-import Footer from "./components/footer"
+import Footer from "./components/footer";
+import flash from "./components/flash"
 export default {
   components:{
     Navbar,
-    Footer
+    Footer,
+    flash
   },
-  created(){
-  }
 }
 </script>
 

@@ -46,7 +46,52 @@ export default new Vuex.Store({
         description:'Information about students in each faculty',
         link:'search'
       }
-    ]
+    ],
+    studentForm:[
+      {
+        icon:'fas fa-user-circle fa-3x prefix',
+        label:'First Name',
+        model:'firstName'
+      },
+      {
+        icon:'fas fa-user-circle fa-3x prefix',
+        label:'Last Name',
+        model:'lastName'
+
+      },
+      {
+        icon:'fas fa-graduation-cap fa-3x prefix',
+        label:'Faculty',
+        model:'faculty'
+      },
+      /* 
+      {
+        icon:'fas fa-layer-group fa-3x prefix',
+        label:'Level',
+        model:'level'
+      }, */
+      {
+        icon:'fas fa-sort-numeric-down fa-3x prefix',
+        label:'Roll no',
+        model:'rollno'
+      },
+      {
+        icon:'fa fa-envelope fa-3x prefix',
+        label:'Email',
+        model:'email'
+      },
+      {
+        icon:'fa fa-address-book fa-3x prefix',
+        label:'Address',
+        model:'address'
+      },
+      {
+        icon:'fas fa-phone fa-3x prefix',
+        label:'Phone',
+        model:'phone'
+      },
+    ],
+    flashMessage:''
   },
   getters:{
     selections(state){
@@ -54,12 +99,31 @@ export default new Vuex.Store({
     },
     adminJobs(state){
       return state.adminJobs;
+    },
+    studentFields(state){
+      return state.studentForm;
+    },
+    flashMessage(state){
+      return state.flashMessage;
     }
   },
   mutations: {
+    setFlash(state,message){
+      console.log(message);
+      state.flashMessage = message;
+    },
+    removeFlash(state){
+      state.flashMessage = null;
+    }
   },
   actions: {
-  },
-  modules: {
+    setFlash(context,payload){
+      const message = payload;
+      context.commit('setFlash',message)
+
+      setTimeout(() => {
+        context.commit('removeFlash');
+      }, 3000);
+    }
   }
 })
