@@ -6,8 +6,9 @@ import Admin from '../views/admin.vue';
 import AddStudent from '../views/studentForm.vue';
 import getAllStudents from '../views/getAllStudents';
 import getFaculty from '../views/getFaculty';
-import studentDetails from '../views/studentDetails';
 import studentsByFaculty from '../views/studentsByFaculty.vue';
+import studentProfile from '../views/studentProfile.vue';
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -30,7 +31,7 @@ const routes = [
   {path:'/getAllStudents',name:'getAllStudents',component:getAllStudents},
   {path:'/getAllStudents/:faculty',name:'getAllStudentsOfFaculty',component:studentsByFaculty},
   {path:'/getFaculty',name:'getFaculty',component:getFaculty},
-  {path:'/student/:name',name:'studentDetails',component:studentDetails}
+  {path:'/profile/:name',name:'studentProfile',component:studentProfile}
 
   
 ];

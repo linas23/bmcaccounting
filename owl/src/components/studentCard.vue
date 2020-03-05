@@ -1,31 +1,59 @@
 <template>
-        <sequential-entrance fromBottom >
-            <div class="card" v-for="(student, index) in students" :key="index">
-                        <div class="title">
-                            {{student.name}}
-                        </div>
-                        <div class="content">
-                            <div class="btn btn-small" @click="viewdetails(student.rollno)">
-                                View Profile
-                            </div>
-                            <br>
-                            {{student.address}}
-                            <br>
-                            {{student.email}}
-                            <br>
-                            {{student.faculty}}
-                        </div>
+<sequential-entrance fromBottom >
+    <div class="card" v-for="(student, index) in students" :key="index">
+                <div class="title">
+                    {{student.fullname}}
+                </div>
+                <div class="content">
+                    
+                    <i class="fa fa-address-card prefix"></i>
+                    {{student.address}}
+                    <br>
+                    <i class="fa fa-envelope prefix"></i>
+                    {{student.email}}
+                    <br>
+                    <div>
+                        <i class="fas fa-graduation-cap prefix"></i>
+                        {{student.faculty}}
+                        <i class="fas fa-layer-group prefix"></i>
+                        {{student.level}}
                     </div>
+                    <div class="btn btn-small" @click="viewDetails(student)">
+                        View Profile
+                    </div>
+                </div>
             </div>
-        </sequential-entrance>
+    </div>
+</sequential-entrance>
 </template>
 
 <script>
 export default {
-    props:['students']
+    props:['students'],
+    methods:{
+        viewDetails(std){
+            this.$store.dispatch('getProfileDetails',std.id).then(()=>{
+                this.$router.push({name:'studentProfile',params:{name:std.fullname}});
+            })
+        }
+    }
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+        .card{
+            height:auto;
+            width: 45%;
+            margin: 15px;
+            box-shadow: 0px 0px 15px black;
+            display: inline-block;
+            .title{
+                padding: 5px 30px;
+                font-size: 1.5rem;
+            }
+            .content{
+                padding: 5px 30px;
+                margin: 0px;
+            }
+        }
 </style>

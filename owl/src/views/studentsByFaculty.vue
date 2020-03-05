@@ -35,19 +35,4 @@ export default {
       background-color: #03423c;
       min-height:90vh;
     }
-    .container{
-        padding:20px 0px;
-
-        .card{
-            height:auto;
-            .title{
-                padding: 5px 30px;
-                font-size: 1.5rem;
-            }
-            .content{
-                padding: 5px 30px;
-                margin: 0px;
-            }
-        }
-    }
 </style>

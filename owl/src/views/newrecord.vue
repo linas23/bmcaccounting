@@ -83,7 +83,7 @@ export default {
             level:'',
             date:'',
             time:'',
-            bill:'',
+            bill:[],
             total:''
 }
     },

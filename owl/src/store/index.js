@@ -60,11 +60,11 @@ export default new Vuex.Store({
         model:'lastName'
 
       },
-      {
+      /* {
         icon:'fas fa-graduation-cap fa-3x prefix',
         label:'Faculty',
         model:'faculty'
-      },
+      }, */
       /* 
       {
         icon:'fas fa-layer-group fa-3x prefix',
@@ -82,7 +82,7 @@ export default new Vuex.Store({
         model:'email'
       },
       {
-        icon:'fa fa-addressdata.students-book fa-3x prefix',
+        icon:'fa fa-address-card  fa-3x prefix',
         label:'Address',
         model:'address'
       },
@@ -92,9 +92,9 @@ export default new Vuex.Store({
         model:'phone'
       },
     ],
-    faculties:['BBA','BBS','BA','BSC','Bsc CSIT','BCA'],
+    faculties:['BBA','BBS','BA','BSc','BSc CSIT','BCA'],
     flashMessage:'',
-    studentDetails:{},
+    studentProfile:{},
     studentList:[]
   },
   getters:{
@@ -121,6 +121,9 @@ export default new Vuex.Store({
     },
     studentList(state){
       return state.studentList;
+    },
+    studentProfile(state){
+      return state.studentProfile;
     }
   },
   mutations: {
@@ -138,6 +141,11 @@ export default new Vuex.Store({
     },
     clearStudents(state){
       state.studentList = [];
+    },
+    setProfile(state,profile){
+      const news = {...profile};
+      console.log(news)
+      state.studentProfile = {...profile}
     }
   },
   actions: {
@@ -162,27 +170,44 @@ export default new Vuex.Store({
           })
     },
     getAllStudents(context,commit){
-      console.log('getting all students')
       context.commit('clearStudents')
       axios.get(url+ "getAllStudents")
             .then(res=>{
-              const students = res.data.students
+              const students = res.data.students;
               console.log(students)
               context.commit("addStudents",students)
             })
             .catch(err=>{
-              console.log(err);
+              context.dispatch('setFlash',"something went wrong")
             })
     },
     saveABill(context,details){
       //  save a bill in a database
     },
-    createNewStudent(context,detail){
+    createNewStudent(context,details){
       //  save a new student to database
+      axios.post(url+"addNewStudent",details)
+            .then(res=>{
+              console.log(res);
+              context.dispatch("setFlash","New student saved!!!");
+            })
+            .catch(err=>{
+              console.log(err)
+            });
     },
-    getStudentDetails(context,name){
-      //  query the db with the name and get all the details
-      
+    getProfileDetails(context,id){
+      console.log(id)
+      // http://localhost:3000/api/admin/studentProfile/?id=5e61158dcbff623bfc2f3b70
+      axios.get(url+"/studentProfile",{
+          params:{
+            id:id
+          }
+        })
+        .then(res=>{
+          const { profile } = res.data
+          context.commit('setProfile',profile);
+        })
+
     }
   }
 })

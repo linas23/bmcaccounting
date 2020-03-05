@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 const studentSchema = new mongoose.Schema({
-    name:{
+    firstName:{
+        type:String
+    },
+    lastName:{
         type:String
     },
     email:{
@@ -9,9 +12,27 @@ const studentSchema = new mongoose.Schema({
     },
     address:{
         type:String
+    },
+    faculty:{
+        type:String,
+    },
+    rollno:{
+        type:Number
+    },
+    phone:{
+        type:Number,
+    },
+    level:{
+        type:String
     }
-
+},{
+    toJSON:{virtuals:true},
+    toObject: { virtuals: true }
 })
+
+studentSchema.virtual('fullname').get(function(){
+    return `${this.firstName} ${this.lastName}`;
+});
 
 const Student = mongoose.model('Student',studentSchema);
 

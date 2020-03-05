@@ -1,11 +1,6 @@
 <template>
   <div id="getAllStudents">
       <div class="container">
-          <div class="heading" v-show="faculty">
-              <h3>
-                  Students of {{faculty}}
-              </h3>
-          </div>
         <studentCard :students="students"> </studentCard>
       </div>
   </div>
@@ -14,16 +9,11 @@
 <script>
 import studentCard from '../components/studentCard';
 export default {
-    data(){
-        return{
-            faculty:null
-        }
-    },
-    methods:{
+    /* methods:{
         viewDetails(name){
             this.$router.push({name:'studentDetails',params:{name}})
         }
-    },
+    }, */
     computed:{
         students(){
             return this.$store.getters.studentList;
@@ -38,24 +28,12 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     #getAllStudents{
       background-color: #03423c;
-      min-height:90vh;
+      margin: 0px;
     }
     .container{
-        padding:20px 0px;
-
-        .card{
-            height:auto;
-            .title{
-                padding: 5px 30px;
-                font-size: 1.5rem;
-            }
-            .content{
-                padding: 5px 30px;
-                margin: 0px;
-            }
-        }
+        padding: 20px 0px;
     }
 </style>

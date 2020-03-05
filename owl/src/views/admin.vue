@@ -44,7 +44,7 @@ export default {
 <style lang="scss" scoped>
     #admin{
         background-color: #03423c;
-        height: auto;
+        height: 100vh;
         sequential-entrance{
             // padding: 10px;
             display: flex;
