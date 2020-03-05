@@ -95,7 +95,8 @@ export default new Vuex.Store({
     faculties:['BBA','BBS','BA','BSc','BSc CSIT','BCA'],
     flashMessage:'',
     studentProfile:{},
-    studentList:[]
+    studentList:[],
+    billingStudent:{}
   },
   getters:{
     selections(state){
@@ -124,6 +125,9 @@ export default new Vuex.Store({
     },
     studentProfile(state){
       return state.studentProfile;
+    },
+    billingStudent(state){
+      return state.billingStudent;
     }
   },
   mutations: {
@@ -146,6 +150,9 @@ export default new Vuex.Store({
       const news = {...profile};
       console.log(news)
       state.studentProfile = {...profile}
+    },
+    setBillingStudent(state,data){
+      state.billingStudent = data;
     }
   },
   actions: {
@@ -208,6 +215,23 @@ export default new Vuex.Store({
           context.commit('setProfile',profile);
         })
 
+      },
+      searchStudent(context,payload){
+        console.log(payload);
+        const { f,r } = payload;
+        axios.get(url+ "/searchStudent",{
+          params:{
+            faculty:f,
+            rollno:r
+          }
+        }).then(res=>{
+          console.log(res)
+          const data = res.data.data;
+          console.log(data)
+          context.commit('setBillingStudent',data);
+        }).catch(err=>{
+          console.log(err)
+        })
+      }
     }
-  }
 })

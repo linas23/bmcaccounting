@@ -33,6 +33,12 @@
                 {{profile.faculty}}
               </div>
               <div class="col s3">
+                Level
+              </div>
+              <div class="col s9">
+                {{profile.level}}
+              </div>
+              <div class="col s3">
                  Roll no
               </div>
               <div class="col s9">

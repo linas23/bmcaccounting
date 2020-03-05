@@ -76,6 +76,7 @@ export default {
   },
   methods:{
     saveStudent(){
+      console.log(this.details.level)
       this.$store.dispatch('createNewStudent',this.details).then(()=>{
         this.$router.push('/admin');
       });
