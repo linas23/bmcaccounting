@@ -1,7 +1,7 @@
 <template>
-  <div id="getAllStudents">
+  <div id="studentsByFaculty">
       <div class="container">
-          <div class="heading" v-show="faculty">
+          <div class="heading">
               <h3>
                   Students of {{faculty}}
               </h3>
@@ -14,32 +14,24 @@
 <script>
 import studentCard from '../components/studentCard';
 export default {
-    data(){
-        return{
-            faculty:null
-        }
-    },
-    methods:{
-        viewDetails(name){
-            this.$router.push({name:'studentDetails',params:{name}})
-        }
+    components:{
+        studentCard
     },
     computed:{
         students(){
             return this.$store.getters.studentList;
         }
     },
-    components:{
-        studentCard
-    },
     created(){
-        this.$store.dispatch('getAllStudents');
+        const faculty = this.$route.params.faculty;
+        this.faculty = faculty;
+        this.$store.dispatch('getAllStudentsOfFaculty',faculty);
     }
 }
 </script>
 
-<style lang="scss">
-    #getAllStudents{
+<style lang="scss" scoped>
+    #studentsByFaculty{
       background-color: #03423c;
       min-height:90vh;
     }

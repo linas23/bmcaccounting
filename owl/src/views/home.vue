@@ -9,6 +9,7 @@
       voluptatem dolorem earum laboriosam fuga magni, fugiat hic totam dolore vitae sequi.
       voluptatem dolorem earum laboriosam fuga magni, fugiat hic totam dolore vitae sequi.
     </div>
+    <sequential-entrance fromBottom>
     <div id="selections">
           <div class="card " v-for="(select,index) in selections" :key="index">
             <i :class="[select.icon]"></i>
@@ -20,6 +21,7 @@
             </h6>
           </div>
     </div>
+    </sequential-entrance>
     <div class="btns center">
       <router-link to="/createNewRecord" class="btn">
         create new record
@@ -51,13 +53,14 @@ export default {
 <style lang="scss" scoped>
     #homepage{
       background-color: #03423c;
-      height: 90vh;
+      min-height: 90vh;
       color: white;
     }
     .heading{
       padding: 50px 200px;
     }
     #selections{
+      width: 100%;
       padding: 20px;
       display: flex;
       flex-direction: row;
@@ -67,7 +70,7 @@ export default {
       color: white;
       background-color: #111c31;
       word-wrap: break-word;
-      width: 300px;
+      width: 20%;
       height: 400px;
       padding: 0px 30px 50px 30px;
       display: flex;

@@ -1,10 +1,16 @@
 <template>
   <div id="faculty">
+      <sequential-entrance fromLeft>
       <div class="container">
-          <div class="card" v-for="(faculty,index) in faculties" :key="index" @click="getAll(faculty)">
-              {{faculty}}
+          <div tag="div" class="card" v-for="(faculty,index) in faculties" :key="index" @click="getAll(faculty)">
+            <!-- <kinesis-element > -->
+                <div class="faculty">
+                    {{faculty}}    
+                </div>   
+            <!-- </kinesis-element>       -->
           </div>
       </div>
+      </sequential-entrance>
   </div>
 </template>
 
@@ -18,7 +24,6 @@ export default {
     methods:{
         getAll(faculty){
             this.$router.push({name:'getAllStudentsOfFaculty',params:{faculty}});
-            console.log(faculty);
         }
     }
 }
@@ -47,7 +52,15 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        font-size: 1.8rem;
+        // font-size: 1.8rem;
+
+        .faculty{
+            font-size: 2.3rem;
+            width: 30%;
+            background: none;
+            color: black;
+        }
+        
     }
     .card:hover{
         cursor: pointer;

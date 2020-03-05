@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import axios from 'axios'
 Vue.use(Vuex)
+const url = "http://localhost:3000/api/admin/";
 
 export default new Vuex.Store({
   state: {
@@ -34,17 +35,17 @@ export default new Vuex.Store({
       {
         title:'Add a student',
         description:"Enter the record for new Student",
-        link:'addStudent'
+        link:'addStudent',
       },
       {
         title:'Get all students',
         description:'Get the details of every students',
-        link:'getAllStudents'
+        link:'getAllStudents',
       },
       {
         title:'Search in Faculty',
         description:'Information about students in each faculty',
-        link:'search'
+        link:'getFaculty',
       }
     ],
     studentForm:[
@@ -81,7 +82,7 @@ export default new Vuex.Store({
         model:'email'
       },
       {
-        icon:'fa fa-address-book fa-3x prefix',
+        icon:'fa fa-addressdata.students-book fa-3x prefix',
         label:'Address',
         model:'address'
       },
@@ -91,7 +92,10 @@ export default new Vuex.Store({
         model:'phone'
       },
     ],
-    flashMessage:''
+    faculties:['BBA','BBS','BA','BSC','Bsc CSIT','BCA'],
+    flashMessage:'',
+    studentDetails:{},
+    studentList:[]
   },
   getters:{
     selections(state){
@@ -105,6 +109,18 @@ export default new Vuex.Store({
     },
     flashMessage(state){
       return state.flashMessage;
+    },
+    faculties(state){
+    return state.faculties;
+    },
+    listOfStudents(state){
+      return state.listOfStudents;
+    },
+    studentDetails(state){
+      return state.studentDetails;
+    },
+    studentList(state){
+      return state.studentList;
     }
   },
   mutations: {
@@ -114,16 +130,59 @@ export default new Vuex.Store({
     },
     removeFlash(state){
       state.flashMessage = null;
+    },
+    addStudents(state,students){
+      students.forEach(el=>{
+        state.studentList.push(el)
+      })
+    },
+    clearStudents(state){
+      state.studentList = [];
     }
   },
   actions: {
     setFlash(context,payload){
       const message = payload;
       context.commit('setFlash',message)
-
       setTimeout(() => {
         context.commit('removeFlash');
       }, 3000);
+    },
+    getAllStudentsOfFaculty(context,faculty){
+      //  query database and store to list of students
+      context.commit('clearStudents');
+      axios.get(url+"StudentsByFaculty/"+ faculty)
+          .then(res=>{
+            console.log(res.data.data);
+            const students =  res.data.data;
+            context.commit('addStudents',students);
+          })
+          .catch(err=>{
+            console.log(err);
+          })
+    },
+    getAllStudents(context,commit){
+      console.log('getting all students')
+      context.commit('clearStudents')
+      axios.get(url+ "getAllStudents")
+            .then(res=>{
+              const students = res.data.students
+              console.log(students)
+              context.commit("addStudents",students)
+            })
+            .catch(err=>{
+              console.log(err);
+            })
+    },
+    saveABill(context,details){
+      //  save a bill in a database
+    },
+    createNewStudent(context,detail){
+      //  save a new student to database
+    },
+    getStudentDetails(context,name){
+      //  query the db with the name and get all the details
+      
     }
   }
 })

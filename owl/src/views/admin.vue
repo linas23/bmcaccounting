@@ -5,27 +5,38 @@
           <h1>Manage your Students, Admin</h1>
       </div>
       <div class="container">
+        <sequential-entrance fromRight>
           <div class="card center" v-for="(job,index) in adminjobs"  :key="index">
               <div class="card-title white-text">
+                  <!-- {{jobs[index]}} -->
                 {{job.description}}
               </div>
               <router-link :to="job.link">
+                  {{job.handle}}
                   <div class="btn red">
                       {{job.title}}
                   </div>
               </router-link>
-
           </div>
+        </sequential-entrance>
       </div>
   </div>
 </template>
 
 <script>
 export default {
+    data(){
+        return{
+            // jobs:['addStudent','getAllStudents','nothing']
+        }
+    },
     computed:{
         adminjobs(){
             return this.$store.getters.adminJobs;
         }
+    },
+    methods:{
+        
     }
 }
 </script>
@@ -33,8 +44,8 @@ export default {
 <style lang="scss" scoped>
     #admin{
         background-color: #03423c;
-        height: 90vh;
-        .container{
+        height: auto;
+        sequential-entrance{
             // padding: 10px;
             display: flex;
             flex-direction: row;
