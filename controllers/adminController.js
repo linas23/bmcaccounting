@@ -2,7 +2,7 @@ const Student = require('../models/student');
 const catchAsync = require('../utils/catchAsync');
 
 exports.createNewStudent = catchAsync(async(req,res,next)=>{
-    const { firstName,lastName , email, address, faculty,rollno,phone,} = req.body;
+    const { firstName,lastName , email, address, faculty, rollno, phone, level} = req.body;
     const student =await Student.create({
         firstName,
         lastName,
@@ -10,8 +10,11 @@ exports.createNewStudent = catchAsync(async(req,res,next)=>{
         address,
         faculty,
         rollno,
-        phone
+        phone,
+        level
     })
+
+    if(!student) next(new AppError('Failed to create new student',400))
     
     res.status("201").json({
         "status":"success",
@@ -27,14 +30,17 @@ exports.getAllStudents = catchAsync(async(req,res,next)=>{
 
 exports.updateStudent = catchAsync(async(req,res,next)=>{
 
-    console.log(req.params.id);
-    const { name , email, address, faculty } = req.body;
-
+    const { firstName,lastName , email, address, faculty, rollno, phone, level} = req.body;
+    console.log(req.params.id)
     const student =await Student.findOneAndUpdate({_id:req.params.id},{
-        name,
+        firstName,
+        lastName,
         email,
         address,
-        faculty
+        faculty,
+        rollno,
+        phone,
+        level
     },{new:true});
 
     res.status(200).send({
@@ -58,11 +64,12 @@ exports.studentsByFaculty = catchAsync(async(req,res,next)=>{
 //  get a particular student by searching
 
 exports.searchStudent = catchAsync(async(req,res,next)=>{
-    console.log(req.body)
+    // console.log(req.body)
     //search with the help of faculty and a roll no
-    const { faculty,rollno } = req.body;
-
-    const student = await Student.find({faculty,rollno});
+    console.log(req.query)
+    const { faculty , rollno , level } = req.query;
+    console.log(faculty,rollno,level);
+    const student = await Student.findOne({faculty,rollno,level});
     console.log(student);
 
 
@@ -76,7 +83,7 @@ exports.searchStudent = catchAsync(async(req,res,next)=>{
 
 exports.getStudentProfile = catchAsync(async(req,res,next)=>{
     const { id } = req.query;
-    const student = await Student.findOne({_id:id});
+    const student = await Student.findOne({_id:id}).populate('bills');
     console.log(student)
 
     res.status(200).json({
@@ -84,3 +91,4 @@ exports.getStudentProfile = catchAsync(async(req,res,next)=>{
         "profile":student
     })
 })
+

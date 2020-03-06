@@ -8,7 +8,11 @@
 
 <script>
 export default {
-    props:['show'],
+    computed:{
+        message(){
+            return this.$store.getters.flashMessage;
+        }
+    },
     created(){
         this.$store.dispatch('removeFlash');
     }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar></Navbar>
-    <flash :show="flashMessage"></flash>
+    <flash></flash>
     <router-view></router-view>
     <Footer></Footer>
   </div>
@@ -17,11 +17,7 @@ export default {
     Footer,
     flash
   },
-  computed:{
-    flashMessage(){
-            return this.$store.getters.flashMessage;
-        }
-  }
+  
 }
 </script>
 

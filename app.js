@@ -13,7 +13,7 @@ mongoose.connect('mongodb://localhost/bmcaccounting',
         {
             useNewUrlParser:true,
             useUnifiedTopology:true,
-            useFindAndModify:true
+            useFindAndModify:false
         })
         .then(()=>{
             console.log('db connected successfully');

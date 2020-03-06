@@ -2,29 +2,51 @@ const mongoose = require('mongoose');
 
 const studentSchema = new mongoose.Schema({
     firstName:{
-        type:String
+        type:String,
+        required:[true,"This field is required."]
     },
     lastName:{
-        type:String
+        type:String,
+        required:[true,"This field is required."]
+
     },
     email:{
-        type:String
+        type:String,
+        required:[true,"This field is required."]
+
     },
     address:{
-        type:String
+        type:String,
+        required:[true,"This field is required."]
+
     },
     faculty:{
         type:String,
+        required:[true,"This field is required."]
+
     },
     rollno:{
-        type:Number
+        type:Number,
+        required:[true,"This field is required."]
+
     },
     phone:{
         type:Number,
+        required:[true,"This field is required."]
+
     },
     level:{
-        type:String
-    }
+        type:String,
+        required:[true,"This field is required."]
+
+    },
+    bills:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'Bill'
+        }
+
+    ]
 },{
     toJSON:{virtuals:true},
     toObject: { virtuals: true }
