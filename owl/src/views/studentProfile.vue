@@ -50,15 +50,36 @@
               <div class="col s9">
                 {{profile.phone}}
               </div>
-              <div class="payments">
+              <div class="payments" v-if="profile.bills">
                   <h4>
                       Here are your latest payment records.
                   </h4>
                   <div class="details">
-                      {{profile.bills}}
-                      <div class="card">a</div>
-                      <div class="card">a</div>
-                      <div class="card">a</div>
+                      <table class="striped grey">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr v-for="(bill,index) in profile.bills" :key="index">
+                            <td>{{bill.date | filterDate}}</td>
+                            <td>
+                            <div v-for="(item,index) in bill.particulars" :key="index">
+                                {{item.field}}
+                            </div>
+                            </td>
+                            <td>
+                            <div v-for="(item,index) in bill.particulars" :key="index">
+                                {{item.amount}}
+                            </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                     </table>
                   </div>
               </div>
           </div>

@@ -1,11 +1,12 @@
 <template>
-<sequential-entrance fromBottom >
+<sequential-entrance fromBottom :delay="200" class="holder">
     <div class="card" v-for="(student, index) in students" :key="index">
+        <img src="../assets/images/tu.png" alt="">
                 <div class="title">
+                    <i class="fa fa-user prefix"></i>
                     {{student.fullname}}
                 </div>
                 <div class="content">
-                    
                     <i class="fa fa-address-card prefix"></i>
                     {{student.address}}
                     <br>
@@ -42,6 +43,9 @@ export default {
 
 <style lang="scss" scoped>
         .card{
+            // background-size:100% 100%;
+            // background-repeat: no-repeat;
+            // background-position-x: 100px;
             height:auto;
             width: 45%;
             margin: 15px;
@@ -54,6 +58,12 @@ export default {
             .content{
                 padding: 5px 30px;
                 margin: 0px;
+            }
+            img{
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                opacity: 0.5;
             }
         }
 </style>

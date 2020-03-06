@@ -1,17 +1,16 @@
 <template>
-  <div id="flash" class="center" v-if="flashMessage">
+  <div id="flash" class="center" v-if="show">
       <h3>
-        {{flashMessage}}
+        {{show}}
       </h3>
   </div>
 </template>
 
 <script>
 export default {
-    computed:{
-        flashMessage(){
-            return this.$store.getters.flashMessage;
-        }
+    props:['show'],
+    created(){
+        this.$store.dispatch('removeFlash');
     }
 }
 </script>

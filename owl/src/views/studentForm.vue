@@ -6,7 +6,14 @@
     </h3>
   </div>
   <div class="container">
-      
+    <!-- <div class="error">
+      <div class="card">
+        error submitting the form
+        <div v-if="!$v.details.name.required">
+          hello
+        </div>
+      </div>
+    </div> -->
     <form>
       <div class="row">
          <div class="input-field col s12">
@@ -54,6 +61,7 @@
 </template>
 
 <script>
+import {required,unique,} from 'vuelidate'
 export default {
   data(){
     return{
@@ -69,6 +77,35 @@ export default {
       }
     }
   },
+  validations:{
+    details:{
+      firstName:{
+        required
+      },
+      lastName:{
+        required
+      },
+      faculty:{
+        required
+      },
+      rollno:{
+        required
+      },
+      email:{
+        required,
+        unique
+      },
+      level:{
+        required
+      },
+      phone:{
+        required
+      },
+      address:{
+        required
+      }
+    }
+  },
   computed:{
     fields(){
       return this.$store.getters.studentFields;
@@ -76,9 +113,10 @@ export default {
   },
   methods:{
     saveStudent(){
-      console.log(this.details.level)
       this.$store.dispatch('createNewStudent',this.details).then(()=>{
         this.$router.push('/admin');
+      }).catch(err=>{
+        console.log(err)
       });
     }
   },

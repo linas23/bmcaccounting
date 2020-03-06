@@ -3,11 +3,13 @@
       <sequential-entrance fromLeft>
       <div class="container">
           <div tag="div" class="card" v-for="(faculty,index) in faculties" :key="index" @click="getAll(faculty)">
-            <!-- <kinesis-element > -->
+          <kinesis-container>
+            <kinesis-element >
                 <div class="faculty">
                     {{faculty}}    
                 </div>   
-            <!-- </kinesis-element>       -->
+            </kinesis-element>      
+          </kinesis-container>
           </div>
       </div>
       </sequential-entrance>

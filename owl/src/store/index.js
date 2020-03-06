@@ -117,7 +117,7 @@ export default new Vuex.Store({
       return state.flashMessage;
     },
     faculties(state){
-    return state.faculties;
+      return state.faculties;
     },
     listOfStudents(state){
       return state.listOfStudents;
@@ -140,7 +140,6 @@ export default new Vuex.Store({
   },
   mutations: {
     setFlash(state,message){
-      console.log(message);
       state.flashMessage = message;
     },
     removeFlash(state){
@@ -164,12 +163,17 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    setFlash(context,payload){
+    /* setFlash(context,payload){
       const message = payload;
       context.commit('setFlash',message)
       setTimeout(() => {
         context.commit('removeFlash');
       }, 3000);
+    } */
+    removeFlash(context){
+      setTimeout(() => {
+        context.commit('removeFlash');
+      }, 1000);
     },
     getAllStudentsOfFaculty(context,faculty){
       //  query database and store to list of students
@@ -193,21 +197,18 @@ export default new Vuex.Store({
               context.commit("addStudents",students)
             })
             .catch(err=>{
-              context.dispatch('setFlash',"something went wrong")
+              context.commit('setFlash',"something went wrong")
             })
     },
-    saveABill(context,details){
-      //  save a bill in a database
-    },
+    //  save a new student to database
     createNewStudent(context,details){
-      //  save a new student to database
       axios.post(url+"addNewStudent",details)
             .then(res=>{
-              console.log(res);
-              context.dispatch("setFlash","New student saved!!!");
+              console.log(res)
+              context.commit("setFlash","New student saved!!!");
             })
             .catch(err=>{
-              console.log(err)
+              context.commit('setFlash',"something went wrong")
             });
     },
     getProfileDetails(context,id){
