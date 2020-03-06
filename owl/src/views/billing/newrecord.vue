@@ -27,11 +27,29 @@
                     </div>
                     <div class="input-field col s12">
                         <div class="material-icons prefix">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <select v-model="level">
+                            <option value="" disabled selected>Choose your level</option>
+                            <option value="1st sem">1st sem</option>
+                            <option value="2nd sem">2nd sem</option>
+                            <option value="3rd sem">3rd sem</option>
+                            <option value="4th sem">4th sem</option>
+                            <option value="5th sem">5th sem</option>
+                            <option value="6th sem">6th sem</option>
+                            <option value="7th sem">7th sem</option>
+                            <option value="8th sem">8th sem</option>
+                        </select>
+                        <label>Level</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <div class="material-icons prefix">
                             <i class="fas fa-sort-numeric-down"></i>
                         </div>
                         <input type="text" v-model="rollno">
                         <label for="roll">Roll no</label>
                     </div> 
+                    
                     <div class="center">
                         <div class="btn" @click="searchStudent">
                             Get a student
@@ -56,18 +74,18 @@ export default {
             /* name:'',
             faculty:'',
             rollno:'',
-            level:'',
             date:'',
             time:'',
             bill:[],
             total:'' */
+            level:'',
             faculty:'',
             rollno:''
 }
     },
     methods:{
         searchStudent(){
-            this.$store.dispatch('searchStudent',{f:this.faculty,r:this.rollno})
+            this.$store.dispatch('searchStudent',{f:this.faculty,r:this.rollno,l:this.level})
                         .then(()=>{
                             this.$router.push({name:'billingForm'})
                         })
@@ -96,18 +114,19 @@ export default {
 <style lang="scss" scoped>
     #newRecord{
         background-color: #03423c;
-        min-height: 90vh;
+        height: 90vh;
+
         // color:black;
         .container{
             height: 100%;
-            padding: 150px 300px;
+            padding: 100px 300px;
         }
         .card{
             padding: 20px;
             background-color: #021b19;
             color: black;
             margin: 0px;
-            height: 400px;
+            height: auto;
             width: 400px;
             display: flex;
             flex-direction: column;

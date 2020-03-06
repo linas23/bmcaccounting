@@ -96,7 +96,12 @@ export default new Vuex.Store({
     flashMessage:'',
     studentProfile:{},
     studentList:[],
-    billingStudent:{}
+    billingStudent:{},
+    fees:[
+      {head:"monthly fee",amount:"2000"},
+      {head:"library fee",amount:"200"},
+      {head:"admissioin fee",amount:"200"}
+    ]
   },
   getters:{
     selections(state){
@@ -128,6 +133,9 @@ export default new Vuex.Store({
     },
     billingStudent(state){
       return state.billingStudent;
+    },
+    fees(state){
+      return state.fees;
     }
   },
   mutations: {
@@ -215,14 +223,15 @@ export default new Vuex.Store({
           context.commit('setProfile',profile);
         })
 
-      },
-      searchStudent(context,payload){
+    },
+    searchStudent(context,payload){
         console.log(payload);
-        const { f,r } = payload;
+        const { f,r ,l} = payload;
         axios.get(url+ "/searchStudent",{
           params:{
             faculty:f,
-            rollno:r
+            rollno:r,
+            level:l
           }
         }).then(res=>{
           console.log(res)
@@ -232,6 +241,18 @@ export default new Vuex.Store({
         }).catch(err=>{
           console.log(err)
         })
-      }
+    },
+    verifyAndSave(context,payload){
+      const {particulars,studentId} = payload;
+      axios.post(url+"bill",{
+        particulars,
+        studentId
+      }).then(res=>{
+        console.log(res)
+        context.commit('setFlash',"New Bill is saved.")
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
     }
 })

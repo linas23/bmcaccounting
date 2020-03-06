@@ -55,6 +55,7 @@
                       Here are your latest payment records.
                   </h4>
                   <div class="details">
+                      {{profile.bills}}
                       <div class="card">a</div>
                       <div class="card">a</div>
                       <div class="card">a</div>

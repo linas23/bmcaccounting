@@ -2,7 +2,7 @@
   <div id="bill">
     <div class="container">
       <sequential-entrance fromRight> 
-        <div class="row card">
+        <div class="row card white-text">
           <div class="input-field col s6">
             <i class="material-icons prefix">account_circle</i>
             <input type="text" :value="student.fullname">
@@ -29,34 +29,36 @@
             <input type="text" :value="student.level">
             <label for="level" class="active">Level</label>
           </div>
-          <div class="input-field col s6 black-text">
-            <div class="material-icons prefix white-text">
-              <i class="fas fa-calendar-week"></i>
-            </div>
-            <input type="text" class="datepicker">
-            <label for="date">Date</label>
-          </div>
-          <div class="input-field col s6">
+          <!-- <div class="input-field col s6">
             <div class="material-icons prefix">
               <i class="fas fa-clock"></i>
             </div>
-            <input type="text" class="timepicker">
+            <input type="text" class="timepicker" v-model="time">
             <label for="time">time</label>
           </div>
+                    
+          <div class="input-field col s6 ">
+            <div class="material-icons prefix ">
+              <i class="fas fa-calendar-week"></i>
+            </div>
+            <input type="text" class="datepicker" v-model="date">
+            <label for="date">Date</label>
+          </div> -->
+
           <div class="input-field col s12">
             <select v-model="bill" multiple>
               <option value="" disabled selected>Choose your option</option>
-              <option value="123">Monthly fee</option>
-              <option value="456">Admission fee</option>
-              <option value="456">library fee</option>
+              <option  v-for="(fee,index) in fees" :key="index" :value="index">
+                {{fee.head}}
+              </option>
             </select>
             <label for="bill">Billing for</label>
           </div>
           <div class="col s12">
-            Total : Rs 123
+            Total : {{total || 0}}
           </div>
           <div class="center">
-            <div class="btn" @click="verifyAndSave">
+            <div class="btn" @click="verifyAndSave(student._id)">
               verified and save
             </div>
           </div>
@@ -68,10 +70,48 @@
 
 <script>
   export default {
+    data(){
+      return{
+        bill:[],
+        
+      }
+    },
     computed: {
       student() {
         return this.$store.getters.billingStudent;
+      },
+      total(){
+         var sum=0;
+         this.bill.forEach(el=>{
+           sum+=el.amount
+          })
+          return sum;
+        },
+      fees(){
+        return this.$store.getters.fees;
       }
+    },
+    methods:{
+      verifyAndSave(id){
+          const particulars = [];
+          this.bill.forEach(el=>{
+            const amount = this.fees[el].amount;
+            const field = this.fees[el].head
+            const detail = {
+              amount,
+              field
+            }
+            particulars.push(detail)
+          })
+          const studentId = id;
+          this.$store.dispatch('verifyAndSave',{particulars,studentId})
+                .then(()=>{
+                  this.$router.push('/admin');
+                });
+      }
+    },
+    mounted(){
+      M.AutoInit();
     }
   }
 </script>
