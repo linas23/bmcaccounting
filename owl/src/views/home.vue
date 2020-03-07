@@ -1,21 +1,21 @@
 <template>
   <div id="homepage">
     <div class="heading center">
-      <H5>
-        A User Interface for recording the accounts of students of Bhaktapur Multiple Campus.
-      </H5>
-      <br>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla aperiam soluta tempora nesciunt officia at minima ipsam facere 
-      voluptatem dolorem earum laboriosam fuga magni, fugiat hic totam dolore vitae sequi.
-      voluptatem dolorem earum laboriosam fuga magni, fugiat hic totam dolore vitae sequi.
+      <h4>
+        A User Interface for recording the accounts of students of 
+        <br>
+        <strong>
+          Bhaktapur Multiple Campus.
+        </strong>
+      </h4>
     </div>
     <sequential-entrance fromBottom>
     <div id="selections">
           <div class="card " v-for="(select,index) in selections" :key="index">
             <i :class="[select.icon]"></i>
-            <h5 class="red-text">
+            <h4 class="red-text">
               {{select.title}}
-            </h5>
+            </h4>
             <h6>
               {{select.description}}
             </h6>
@@ -55,9 +55,15 @@ export default {
       background-color: #03423c;
       min-height: 90vh;
       color: white;
+      font-family: 'Merriweather', serif;
+
     }
     .heading{
       padding: 50px 200px;
+      strong{
+        font-family: 'Trade Winds', cursive;
+        font-size: 2.3rem;
+      }
     }
     #selections{
       width: 100%;
@@ -65,6 +71,10 @@ export default {
       display: flex;
       flex-direction: row;
       justify-content: space-around;
+      font-family: 'Caveat', cursive; 
+        h6{
+           font-family: 'Roboto Slab', serif;
+        }
     }
     .card{
       color: white;

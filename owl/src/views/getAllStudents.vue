@@ -1,7 +1,14 @@
 <template>
   <div id="getAllStudents">
       <div class="container">
-        <studentCard :students="students"> </studentCard>
+        <div class="heading white-text">
+            <h3>
+                All students of BMC
+            </h3>
+        </div>
+          <div class="row">
+            <studentCard :students="students"> </studentCard>
+          </div>
       </div>
   </div>
 </template>
@@ -9,11 +16,7 @@
 <script>
 import studentCard from '../components/studentCard';
 export default {
-    /* methods:{
-        viewDetails(name){
-            this.$router.push({name:'studentDetails',params:{name}})
-        }
-    }, */
+    
     computed:{
         students(){
             return this.$store.getters.studentList;
@@ -31,9 +34,13 @@ export default {
 <style lang="scss" scoped>
     #getAllStudents{
       background-color: #03423c;
-      margin: 0px;
+
     }
     .container{
         padding: 20px 0px;
+
+        .heading{
+            font-family: 'Changa', sans-serif;
+        }
     }
 </style>

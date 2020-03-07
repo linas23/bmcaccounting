@@ -1,7 +1,7 @@
 <template>
-  <div id="flash" class="center" v-if="show">
+  <div id="flash" class="center" v-if="message">
       <h3>
-        {{show}}
+        {{message}}
       </h3>
   </div>
 </template>
@@ -14,13 +14,17 @@ export default {
         }
     },
     created(){
-        this.$store.dispatch('removeFlash');
+        setTimeout(() => {
+            console.log('hello there')
+            this.$store.dispatch("removeFlash");
+        }, 3000);
     }
 }
 </script>
 
 <style lang="scss">
     #flash{
+        font-family: 'Changa', sans-serif;
         width: 100%;
         height: 8vh;
         padding: 8px;

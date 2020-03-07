@@ -21,6 +21,11 @@ mongoose.connect('mongodb://localhost/bmcaccounting',
         .catch((err)=>{
             console.log('error connecting database');
         })
+        // process.env.NODE_ENV==='production'
+/* if(true){
+    const url = process.env.DATABASE.replace('<password>',process.env.DATABASE_PASSWORD)
+    console.log(url)
+} */
 
 //  middlewares
 app.use(cors());

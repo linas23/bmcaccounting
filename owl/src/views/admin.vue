@@ -1,11 +1,11 @@
 
 <template>
   <div id="admin">
-      <div class="heading center">
-          <h1>Manage your Students, Admin</h1>
+      <div class="heading center white-text">
+          <h3>Manage your Students, Admin</h3>
       </div>
-      <div class="container">
         <sequential-entrance fromRight>
+      <div class="container">
           <div class="card center" v-for="(job,index) in adminjobs"  :key="index">
               <div class="card-title white-text">
                   <!-- {{jobs[index]}} -->
@@ -18,8 +18,8 @@
                   </div>
               </router-link>
           </div>
-        </sequential-entrance>
       </div>
+        </sequential-entrance>
   </div>
 </template>
 
@@ -44,8 +44,16 @@ export default {
 <style lang="scss" scoped>
     #admin{
         background-color: #03423c;
-        height: 100vh;
-        sequential-entrance{
+        height:120vh;
+        font-family: 'Philosopher', sans-serif;
+        max-width: 100vw;
+        overflow: hidden;
+        .heading{
+            font-family: 'Changa', sans-serif;
+            padding: 10px;
+
+        }
+        .container{
             // padding: 10px;
             display: flex;
             flex-direction: row;

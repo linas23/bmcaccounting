@@ -43,7 +43,8 @@ const studentSchema = new mongoose.Schema({
     bills:[
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref:'Bill'
+            ref:'Bill',
+            default:null
         }
 
     ]

@@ -1,7 +1,7 @@
 <template>
   <div id="studentsByFaculty">
       <div class="container">
-          <div class="heading">
+          <div class="heading white-text">
               <h3>
                   Students of {{faculty}}
               </h3>
@@ -34,5 +34,11 @@ export default {
     #studentsByFaculty{
       background-color: #03423c;
       min-height:90vh;
+
+      .heading{
+          padding: 10px;
+          font-family: 'Changa', sans-serif;
+          
+      }
     }
 </style>

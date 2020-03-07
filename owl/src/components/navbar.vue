@@ -1,17 +1,17 @@
 <template>
   <div>
       <nav class="container-fluid">
-          <div class="nav-wrapper">
-              <a class="brand-logo">
-                  <router-link to="/">
-                      <i class="material-icons">school</i>
-                      BMC Accounting
-                  </router-link>
-              </a>
-              <div class="center college">
-                  Bhaktapur  Multiple  Campus
-              </div>
-          </div>
+            <div class="nav-wrapper">
+                <a class="brand-logo">
+                    <router-link to="/">
+                        <i class="material-icons">school</i>
+                        BMC Accounting
+                    </router-link>
+                </a>
+                <div class="center college col s12">
+                    Bhaktapur  Multiple  Campus
+                </div>
+            </div>
       </nav>
   </div>
 </template>
@@ -26,7 +26,7 @@ export default {
     @import url('https://fonts.googleapis.com/css?family=Nosifer&display=swap');
 
     .container-fluid{
-        height: 10vh;
+        height: auto;
     }
     .nav-wrapper{
         background-color:#234543;

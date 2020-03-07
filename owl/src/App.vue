@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar></Navbar>
-    <flash></flash>
+    <flash v-if="show"></flash>
     <router-view></router-view>
     <Footer></Footer>
   </div>
@@ -17,11 +17,16 @@ export default {
     Footer,
     flash
   },
-  
+  computed:{
+    show(){
+      return this.$store.getters.flashMessage;
+    }
+  }
 }
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css?family=Caveat|Changa|Merriweather|Philosopher|Roboto+Slab|Trade+Winds&display=swap');
   *{
     box-sizing: border-box;
     padding:0px;
@@ -31,4 +36,10 @@ export default {
   h1,h2,h3,h4,h5,h6{
     margin: 0px;
   }
+/* font-family: 'Roboto Slab', serif;
+font-family: 'Merriweather', serif;
+font-family: 'Trade Winds', cursive;
+font-family: 'Caveat', cursive;
+font-family: 'Changa', sans-serif;
+font-family: 'Philosopher', sans-serif; */
 </style>

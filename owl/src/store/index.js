@@ -23,13 +23,12 @@ export default new Vuex.Store({
         description:"Don't worry, your datas are in safe hand.",
         icon:"fas fa-database fa-4x white-text"
 
-      },
+      }/* ,
       {
         title:"Admin",
         description:"Are you an admin?",
         icon:"fas fa-user-circle fa-4x white-text"
-
-      }
+      } */
     ],
     adminJobs:[
       {
@@ -46,6 +45,11 @@ export default new Vuex.Store({
         title:'Search in Faculty',
         description:'Information about students in each faculty',
         link:'getFaculty',
+      },
+      {
+        title:'New Billing Details',
+        description:"Update this according to change in fees.",
+        link:'createNewBill'
       }
     ],
     studentForm:[
@@ -93,7 +97,7 @@ export default new Vuex.Store({
       },
     ],
     faculties:['BBA','BBS','BA','BSc','BSc CSIT','BCA'],
-    flashMessage:'',
+    flashMessage:null,
     studentProfile:{},
     studentList:[],
     billingStudent:{},
@@ -142,7 +146,7 @@ export default new Vuex.Store({
     setFlash(state,message){
       state.flashMessage = message;
     },
-    removeFlash(state){
+    removeFlash(state,message){
       state.flashMessage = null;
     },
     addStudents(state,students){
@@ -154,8 +158,6 @@ export default new Vuex.Store({
       state.studentList = [];
     },
     setProfile(state,profile){
-      const news = {...profile};
-      console.log(news)
       state.studentProfile = {...profile}
     },
     setBillingStudent(state,data){
@@ -171,16 +173,13 @@ export default new Vuex.Store({
       }, 3000);
     } */
     removeFlash(context){
-      setTimeout(() => {
-        context.commit('removeFlash');
-      }, 1000);
+        context.commit("removeFlash");
     },
     getAllStudentsOfFaculty(context,faculty){
       //  query database and store to list of students
       context.commit('clearStudents');
       axios.get(url+"StudentsByFaculty/"+ faculty)
           .then(res=>{
-            console.log(res.data.data);
             const students =  res.data.data;
             context.commit('addStudents',students);
           })
@@ -193,7 +192,6 @@ export default new Vuex.Store({
       axios.get(url+ "getAllStudents")
             .then(res=>{
               const students = res.data.students;
-              console.log(students)
               context.commit("addStudents",students)
             })
             .catch(err=>{
@@ -204,7 +202,6 @@ export default new Vuex.Store({
     createNewStudent(context,details){
       axios.post(url+"addNewStudent",details)
             .then(res=>{
-              console.log(res)
               context.commit("setFlash","New student saved!!!");
             })
             .catch(err=>{
@@ -212,7 +209,6 @@ export default new Vuex.Store({
             });
     },
     getProfileDetails(context,id){
-      console.log(id)
       // http://localhost:3000/api/admin/studentProfile/?id=5e61158dcbff623bfc2f3b70
       axios.get(url+"/studentProfile",{
           params:{
@@ -226,7 +222,6 @@ export default new Vuex.Store({
 
     },
     searchStudent(context,payload){
-        console.log(payload);
         const { f,r ,l} = payload;
         axios.get(url+ "/searchStudent",{
           params:{
@@ -235,9 +230,7 @@ export default new Vuex.Store({
             level:l
           }
         }).then(res=>{
-          console.log(res)
           const data = res.data.data;
-          console.log(data)
           context.commit('setBillingStudent',data);
         }).catch(err=>{
           console.log(err)
@@ -249,11 +242,25 @@ export default new Vuex.Store({
         particulars,
         studentId
       }).then(res=>{
-        console.log(res)
         context.commit('setFlash',"New Bill is saved.")
       }).catch(err=>{
         console.log(err)
       })
+    },
+    saveNewBill(context,payload){
+      const {faculty,title,amount} = payload;
+      axios.post(url+"billDetails",{
+        faculty,
+        title,
+        amount
+      }).then(res=>{
+        console.log(res);
+        context.commit('setFlash',"new billing record saved.")
+      }).catch(err=>{
+        // return err
+        console.log(err);
+        // context.commit('setFlash','failed to create new bill')
+      })
     }
-    }
+  }
 })

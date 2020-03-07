@@ -3,12 +3,13 @@ import VueRouter from 'vue-router';
 import Home from '../views/home.vue';
 import NewRecord from '../views/billing/newrecord';
 import Admin from '../views/admin.vue';
-import AddStudent from '../views/studentForm.vue';
+import AddStudent from '../views/studentForm';
 import getAllStudents from '../views/getAllStudents';
 import getFaculty from '../views/getFaculty';
-import studentsByFaculty from '../views/studentsByFaculty.vue';
+import studentsByFaculty from '../views/studentsByFaculty';
 import studentProfile from '../views/studentProfile.vue';
 import billForm from '../views/billing/billForm';
+import newBilldetails from '../views/billing/newBillDetails';
 Vue.use(VueRouter);
 
 const routes = [
@@ -32,7 +33,8 @@ const routes = [
   {path:'/getAllStudents/:faculty',name:'getAllStudentsOfFaculty',component:studentsByFaculty},
   {path:'/getFaculty',name:'getFaculty',component:getFaculty},
   {path:'/profile/:name',name:'studentProfile',component:studentProfile},
-  {path:'/billing',name:'billingForm',component:billForm}
+  {path:'/billing',name:'billingForm',component:billForm},
+  {path:'/createNewBill',name:'createNewBill',component:newBilldetails}
 
   
 ];

@@ -73,20 +73,21 @@
     data(){
       return{
         bill:[],
-        
+      }
+    },
+    watch:{
+      total:function(){
+        let sum = 0;
+        this.bill.forEach(el=>{
+             sum += this.fees[el].amount;
+         })
+         return sum;
       }
     },
     computed: {
       student() {
         return this.$store.getters.billingStudent;
       },
-      total(){
-         var sum=0;
-         this.bill.forEach(el=>{
-           sum+=el.amount
-          })
-          return sum;
-        },
       fees(){
         return this.$store.getters.fees;
       }

@@ -15,5 +15,7 @@ router.get('/searchStudent',adminController.searchStudent);
 router.get('/studentProfile',adminController.getStudentProfile);
 router.post('/bill',billController.createBill);
 router.get('/allBills',billController.getAllBill);
+router.post('/billdetails',billController.saveBillDetail);
+router.get('/billRecords',billController.getAllBillRecords);
 
 module.exports = router;

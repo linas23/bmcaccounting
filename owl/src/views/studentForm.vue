@@ -1,10 +1,12 @@
 <template>
 <div id="studentForm">
-  <div class="heading center">
+  <div class="heading white-text center">
     <h3>
       Fill up the form for new student
     </h3>
   </div>
+<sequential-entrance fromRight>
+
   <div class="container">
     <!-- <div class="error">
       <div class="card">
@@ -16,6 +18,7 @@
     </div> -->
     <form>
       <div class="row">
+      
          <div class="input-field col s12">
           <select v-model="details.faculty">
             <option value="" disabled selected>Choose your faculty</option>
@@ -25,7 +28,7 @@
             <option value="BSc">BSc</option>
             <option value="BSc CSIT">BSc CSIT</option>
             <option value="BSW">BSW</option>
-            <option value="Masters">Masters</option>
+            <option value="BCA">BCA</option>
           </select>
           <label>Faculty</label>
         </div>
@@ -50,13 +53,14 @@
           <label for="icon_prefix">{{field.label}}</label>
         </div>
       </div>
-    </form>
-    <div class="center">
-      <div class="btn" @click="saveStudent">
-        Save
+      <div class="center">
+        <div class="btn" @click="saveStudent">
+          Save
+        </div>
       </div>
-    </div>
+    </form>
   </div>
+</sequential-entrance>
 </div>
 </template>
 
@@ -131,6 +135,10 @@ export default {
   #studentForm{
     height: 90vh;
     background-color: #03423c;
+    .heading{
+        font-family: 'Changa', sans-serif;
+        padding: 10px;
+    }
   }
 
 </style>

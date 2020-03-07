@@ -1,12 +1,12 @@
 <template>
-<sequential-entrance fromBottom :delay="200" class="holder">
+<sequential-entrance fromBottom :delay="200">
     <div class="card" v-for="(student, index) in students" :key="index">
         <img src="../assets/images/tu.png" alt="">
-                <div class="title">
+                <div class="card-title">
                     <i class="fa fa-user prefix"></i>
                     {{student.fullname}}
                 </div>
-                <div class="content">
+                <div class="card-content">
                     <i class="fa fa-address-card prefix"></i>
                     {{student.address}}
                     <br>
@@ -19,7 +19,7 @@
                         <i class="fas fa-layer-group prefix"></i>
                         {{student.level}}
                     </div>
-                    <div class="btn btn-small" @click="viewDetails(student)">
+                    <div class="btn btn-small" v-on:click="viewDetails(student)">
                         View Profile
                     </div>
                 </div>
@@ -33,6 +33,7 @@ export default {
     props:['students'],
     methods:{
         viewDetails(std){
+            console.log('hello')
             this.$store.dispatch('getProfileDetails',std.id).then(()=>{
                 this.$router.push({name:'studentProfile',params:{name:std.fullname}});
             })
@@ -51,19 +52,25 @@ export default {
             margin: 15px;
             box-shadow: 0px 0px 15px black;
             display: inline-block;
-            .title{
+            .card-title{
                 padding: 5px 30px;
                 font-size: 1.5rem;
             }
-            .content{
+            /* .content{
                 padding: 5px 30px;
                 margin: 0px;
-            }
+            } */
             img{
                 position: absolute;
                 height: 100%;
                 width: 100%;
                 opacity: 0.5;
+                z-index: -1;
+            }
+            .btn-small{
+                margin-top:15px;
+                background:red;
+                cursor: pointer;
             }
         }
 </style>

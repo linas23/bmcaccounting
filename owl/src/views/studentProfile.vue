@@ -50,14 +50,14 @@
               <div class="col s9">
                 {{profile.phone}}
               </div>
-              <div class="payments" v-if="profile.bills">
+              <div class="payments" v-if="profile.bills.length > 0">
                   <h4>
                       Here are your latest payment records.
                   </h4>
                   <div class="details">
                       <table class="striped grey">
                         <thead>
-                        <tr>
+                        <tr class="black white-text">
                             <th>Date</th>
                             <th>Items</th>
                             <th>Total</th>
@@ -81,6 +81,11 @@
                         </tbody>
                      </table>
                   </div>
+              </div>
+              <div class="nobills" v-else>
+                  <h4>
+                      No bills yet to display.
+                  </h4>
               </div>
           </div>
       </div>

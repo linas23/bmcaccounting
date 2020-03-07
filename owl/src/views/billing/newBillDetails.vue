@@ -2,9 +2,9 @@
 <div id="newRecord">
      <div class="container">
          <sequential-entrance fromRight> 
-        <div class="card white-text">
+        <div class="card white-text" >
             <div class="card-title">
-                Create a new record
+                Create a new bill record
             </div>
             <div class="row">
                 <form class="col s12">
@@ -13,19 +13,19 @@
                         <i class="material-icons prefix">
                             <i class="fas fa-graduation-cap"></i>
                         </i>
-                        <select v-model="faculty">
-                            <option value="" disabled selected>Choose your option</option>
+                        <select v-model="faculty" name="faculty">
+                            <option value="" disabled selected class="white-text">Choose your option</option>
                             <option value="BA">BA</option>
                             <option value="BBA">BBA</option>
                             <option value="BBS">BBS</option>
                             <option value="BSc">BSc</option>
                             <option value="BSc CSIT">BSc CSIT</option>
                             <option value="BSW">BSW</option>
-                            <option value="BCA">BCA</option>
+                            <option value="Masters">Masters</option>
                         </select>
-                        <label for="">Select Faculty</label>
+                        <label for="faculty">Select Faculty</label>
                     </div>
-                    <div class="input-field col s12">
+                    <!-- <div class="input-field col s12">
                         <div class="material-icons prefix">
                             <i class="fas fa-layer-group"></i>
                         </div>
@@ -41,18 +41,24 @@
                             <option value="8th sem">8th sem</option>
                         </select>
                         <label>Level</label>
+                    </div> -->
+                    <div class="input-field col s12">
+                        <div class="material-icons prefix">
+                            <i class="fa fa-book" aria-hidden="true"></i>
+                        </div>
+                        <input type="text" v-model="title">
+                        <label for="">Enter billing title</label>
                     </div>
                     <div class="input-field col s12">
                         <div class="material-icons prefix">
-                            <i class="fas fa-sort-numeric-down"></i>
+                            <i class="fa fa-money" aria-hidden="true"></i>
                         </div>
-                        <input type="text" v-model="rollno">
-                        <label for="roll">Roll no</label>
-                    </div> 
-                    
+                        <input type="Number"  v-model="amount">
+                        <label for="">Amount</label>
+                    </div>
                     <div class="center">
-                        <div class="btn" @click="searchStudent">
-                            Get a student
+                        <div class="btn" @click="saveNewBill">
+                            New Billing
                         </div>
                     </div>
                    
@@ -71,42 +77,21 @@ import M from 'materialize-css'
 export default {
     data(){
         return{
-            /* name:'',
             faculty:'',
-            rollno:'',
-            date:'',
-            time:'',
-            bill:[],
-            total:'' */
-            level:'',
-            faculty:'',
-            rollno:''
-}
-    },
-    methods:{
-        searchStudent(){
-            this.$store.dispatch('searchStudent',{f:this.faculty,r:this.rollno,l:this.level})
-                        .then(()=>{
-                            this.$router.push({name:'billingForm'})
-                        })
+            title:'',
+            amount:''
         }
-        /* verifyAndSave(){
-            const details = {
-                name,
-                faculty,
-                rollno,
-                level,
-                date,
-                time,
-                bill,
-                total
-            }
-            this.$store.dispatch('saveABill',details);
-        }
-            */
     },
     mounted(){
         M.AutoInit();
+    },
+    methods:{
+        saveNewBill(){
+            this.$store.dispatch('saveNewBill',{faculty:this.faculty,title:this.title,amount:this.amount})
+                        .then(()=>{
+                            this.$router.push('/admin');
+                        })
+        }
     }
 }
 </script>
@@ -124,7 +109,7 @@ export default {
         .card{
             padding: 20px;
             background-color: #1b534f;
-            color: black;
+            // color: white;
             margin: 0px;
             height: auto;
             width: 400px;

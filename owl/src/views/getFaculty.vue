@@ -1,6 +1,11 @@
 <template>
   <div id="faculty">
-      <sequential-entrance fromLeft>
+      <sequential-entrance fromRight>
+        <div class="heading center white-text">
+            <h3>
+                Get students by faculty
+            </h3>
+        </div>
       <div class="container">
           <div tag="div" class="card" v-for="(faculty,index) in faculties" :key="index" @click="getAll(faculty)">
           <kinesis-container>
@@ -35,6 +40,13 @@ export default {
     #faculty{
         min-height: 90vh;
         background-color: #03423c;
+        max-width: 100vw;
+        overflow: hidden;
+
+        .heading{
+            font-family: 'Changa', sans-serif;
+            padding: 10px;
+        }
     }
     .container{
         display:flex;

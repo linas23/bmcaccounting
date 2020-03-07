@@ -25,6 +25,8 @@ export default {
 <style lang="scss">
 .page-footer{
       background-color: #022420;
+      margin:0px;
+      font-family: 'Trade Winds', cursive;
 
 }
 </style>
