@@ -19,9 +19,15 @@
                         <i class="fas fa-layer-group prefix"></i>
                         {{student.level}}
                     </div>
-                    <div class="btn btn-small" v-on:click="viewDetails(student)">
+                    <div class="btn btn-small" @click="viewDetails(student)">
                         View Profile
                     </div>
+                    <div class="btn btn-small" @click="deleteStudent(student,index)">
+                        <i class="fa fa-trash-o"></i>
+                    </div>
+                    <!-- <div class="btn btn-small" @click="upadteStudent(student)">
+                        <i class="fa fa-edit"></i>
+                    </div> -->
                 </div>
             </div>
     </div>
@@ -37,6 +43,19 @@ export default {
             this.$store.dispatch('getProfileDetails',std.id).then(()=>{
                 this.$router.push({name:'studentProfile',params:{name:std.fullname}});
             })
+        },
+        deleteStudent(std,index){
+            this.$store.dispatch('deleteStudent',std.id).then(()=>{
+                this.students.splice(index,1);
+                /* if(this.$route.params){
+                    this.$router.push({name:'getAllStudentsOfFaculty',params:{faculty:std.faculty}});
+                }else{
+                    this.$router.push({name:'getAllStudents'});
+                } */
+            });
+        },
+        updateSudent(std){
+            
         }
     }
 }
@@ -68,9 +87,10 @@ export default {
                 z-index: -1;
             }
             .btn-small{
-                margin-top:15px;
+                margin:15px 10px 0px 0px;
                 background:red;
                 cursor: pointer;
+
             }
         }
 </style>

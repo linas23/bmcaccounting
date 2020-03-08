@@ -55,7 +55,7 @@
             <label for="bill">Billing for</label>
           </div>
           <div class="col s12">
-            Total : {{total || 0}}
+            <!-- Total : {{total || 0}} -->
           </div>
           <div class="center">
             <div class="btn" @click="verifyAndSave(student._id)">
@@ -125,7 +125,7 @@
     .container {
       padding: 50px;
         .card{
-            background-color: #021b19;
+            background-color: #1b534f;
             height: 75vh;
         }
 

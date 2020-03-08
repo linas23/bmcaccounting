@@ -93,3 +93,14 @@ exports.getStudentProfile = catchAsync(async(req,res,next)=>{
     })
 })
 
+exports.deleteStudent = catchAsync(async(req,res,next)=>{
+
+    const {id} = req.params;
+    console.log(id)
+    const std = await Student.deleteOne({_id: id})
+
+    res.status(200).json({
+        "status":"success",
+        "data":std
+    })
+})

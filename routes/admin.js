@@ -10,6 +10,7 @@ router.get('/',(req,res)=>{
 router.post('/addNewStudent',adminController.createNewStudent);
 router.get('/getAllStudents',adminController.getAllStudents);
 router.patch('/updateStudent/:id',adminController.updateStudent);
+router.delete('/delete/:id',adminController.deleteStudent);
 router.get('/studentsByFaculty/:faculty',adminController.studentsByFaculty);
 router.get('/searchStudent',adminController.searchStudent);
 router.get('/studentProfile',adminController.getStudentProfile);
@@ -17,5 +18,6 @@ router.post('/bill',billController.createBill);
 router.get('/allBills',billController.getAllBill);
 router.post('/billdetails',billController.saveBillDetail);
 router.get('/billRecords',billController.getAllBillRecords);
+
 
 module.exports = router;

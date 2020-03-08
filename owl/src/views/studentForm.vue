@@ -135,6 +135,12 @@ export default {
   #studentForm{
     height: 90vh;
     background-color: #03423c;
+    .container{
+          background-color: #1b534f;
+          margin: 0px auto;
+          padding: 10px;
+
+    }
     .heading{
         font-family: 'Changa', sans-serif;
         padding: 10px;

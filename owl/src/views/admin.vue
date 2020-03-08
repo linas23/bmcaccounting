@@ -1,4 +1,3 @@
-
 <template>
   <div id="admin">
       <div class="heading center white-text">

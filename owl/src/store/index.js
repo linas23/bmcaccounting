@@ -261,6 +261,13 @@ export default new Vuex.Store({
         console.log(err);
         // context.commit('setFlash','failed to create new bill')
       })
+    },
+    deleteStudent(context,id){
+      console.log('deleting student');
+      console.log(id);
+      axios.delete(url+"delete/"+ id).then(()=>{
+        console.log('deleted successfuly')
+      })
     }
   }
 })
